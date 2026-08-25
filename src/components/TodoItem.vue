@@ -12,23 +12,22 @@
   </li>
 </template>
 
-<script>
-export default {
-  name: 'TodoItem',
-  props: {
-    todo: {
-      type: Object,
-      required: true
-    }
-  },
-  methods: {
-    toggle() {
-      this.$store.dispatch('todos/toggleTodo', this.todo.id)
-    },
-    remove() {
-      this.$store.dispatch('todos/removeTodo', this.todo.id)
-    }
+<script setup>
+import store from '../store'
+
+const props = defineProps({
+  todo: {
+    type: Object,
+    required: true
   }
+})
+
+function toggle() {
+  store.dispatch('todos/toggleTodo', props.todo.id)
+}
+
+function remove() {
+  store.dispatch('todos/removeTodo', props.todo.id)
 }
 </script>
 
